@@ -2,7 +2,7 @@ const express = require('express');
 require('dotenv').config()
 const app = express();
 const cors = require('cors');
-const globalErrorHandler = require('./controller/errorController.js');
+const globalErrorHandler = require('./controller/error.controller.js');
 const { configDotenv } = require('dotenv');
 const connectDB = require('./db/connectDB.js')
 const PORT = process.env.PORT || 3000;
