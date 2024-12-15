@@ -13,7 +13,7 @@ app.use(cors())
 
 
 app.all('*', (req, res, next) => {
-    res.status(404).json({ status: "failed", message: "Page Not Found" })
+    res.status(404).json({ status"failed", message: "Page Not Found" })
 })
 
 app.use(globalErrorHandler);
