@@ -3,13 +3,17 @@ require('dotenv').config()
 const app = express();
 const cors = require('cors');
 const globalErrorHandler = require('./controller/error.controller.js');
-const { configDotenv } = require('dotenv');
-const connectDB = require('./db/connectDB.js')
+const connectDB = require('./db/connect.db.js')
 const PORT = process.env.PORT || 3000;
+const userRouter = require('./routes/users.routes.js')
 
 const env = app.get('env');
 
 app.use(cors())
+
+app.use('/api/v1/users', userRouter);
+
+
 
 
 app.all('*', (req, res, next) => {

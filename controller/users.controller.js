@@ -1,4 +1,4 @@
-import Users from "../models/users.model";
+const Users = require("../models/users.model");
 
 const createUser = async (req, res, next) => {
     const user = req.body;
@@ -11,8 +11,9 @@ const createUser = async (req, res, next) => {
             data: newUser,
         });
     } catch (err) {
+        err.status = 500;
         next(err);
     }
 };
 
-export default createUser;
+module.exports = { createUser };

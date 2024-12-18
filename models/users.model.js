@@ -7,11 +7,11 @@ const UserSchema = new Schema(
             required: [true, 'Name is required!'],
         },
         categories: {
-            type: [String], // Fixed: Use array of strings for categories
-            default: [], // Optional: Default to an empty array
+            type: [String],
+            default: [],
         },
-        events_conducted: { // Fixed: Missing colon after key
-            type: [String], // Ensures it's an array of strings
+        events_conducted: {
+            type: [String],
             required: true,
         },
         email: {
@@ -33,7 +33,7 @@ const UserSchema = new Schema(
         role: {
             type: String,
             required: [true, 'Role is required!'],
-            enum: ['vendor', 'customer'], // Enforces specific role values
+            enum: ['vendor', 'customer'],
         },
         location: {
             type: String,
