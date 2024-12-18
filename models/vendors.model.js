@@ -31,7 +31,7 @@ const VendorSchema = new Schema(
                                     required: true,
                                 },
                                 includes: {
-                                    type: String,
+                                    type: [String],
                                     required: true,
                                 },
                             },
@@ -40,7 +40,7 @@ const VendorSchema = new Schema(
                                     type: Number,
                                 },
                                 includes: {
-                                    type: String,
+                                    type: [String],
                                 },
                             },
                             premium: {
@@ -48,7 +48,7 @@ const VendorSchema = new Schema(
                                     type: Number,
                                 },
                                 includes: {
-                                    type: String,
+                                    type: [String],
                                 },
                             },
                             description: {
@@ -66,15 +66,46 @@ const VendorSchema = new Schema(
                 ],
             },
         ],
+        analytics: {
+            type: [{ impression: 0, clicks: 0, overall_rating: this.avg_rating, inquires: 0 }],
+            required: true,
+            default: 0,
+        },
+        service_opted: {
+            type: [String],
+            required: true,
+        },
         about: {
             type: String,
         },
         location: {
             type: String,
+            required: true,
+            enum: [
+                'Ariyalur', 'Chengalpattu', 'Chennai', 'Coimbatore', 'Cuddalore',
+                'Dharmapuri', 'Dindigul', 'Erode', 'Kallakurichi', 'Kanchipuram',
+                'Kanyakumari', 'Karur', 'Krishnagiri', 'Madurai', 'Nagapattinam',
+                'Namakkal', 'Nilgiris', 'Perambalur', 'Pudukkottai', 'Ramanathapuram',
+                'Ranipet', 'Salem', 'Sivagangai', 'Tenkasi', 'Thanjavur',
+                'Theni', 'Thoothukudi', 'Tiruchirappalli', 'Tirunelveli', 'Tirupattur',
+                'Tiruppur', 'Tiruvallur', 'Tiruvannamalai', 'Tiruvarur', 'Vellore',
+                'Viluppuram', 'Virudhunagar'
+            ],
+        },
+        prefered_customer_location: {
+            type: [String],
+            required: true,
+            default: this.location,
         },
         verified: {
             type: Boolean,
             default: false,
+        },
+        text_recent_enquires: {
+            type: [Object],
+        },
+        call_recent_enquires: {
+            type: [Object],
         },
         work_proof: [
             {
@@ -89,21 +120,21 @@ const VendorSchema = new Schema(
             },
         ],
         reviews: {
-            total_reviews: {
+            review_message: {
+                type: String,
+            },
+            review_score: {
                 type: Number,
-                default: 0,
+                // User Id required
             },
-            avg_rating: {
-                type: Number,
-                default: 0.0,
-            },
-            stars: {
-                5: { type: Number, default: 0 },
-                4: { type: Number, default: 0 },
-                3: { type: Number, default: 0 },
-                2: { type: Number, default: 0 },
-                1: { type: Number, default: 0 },
-            },
+        },
+        total_reviews: {
+            type: Number,
+            default: 0,
+        },
+        avg_rating: {
+            type: Number,
+            default: 0.0,
         },
         availability: {
             unavailable_dates: {
