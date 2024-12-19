@@ -58,4 +58,4 @@ const RequirementSchema = new Schema(
     }
 );
 
-module.exports = model('Requirement', RequirementSchema);
+module.exports = new model('Requirement', RequirementSchema);

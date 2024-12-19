@@ -41,4 +41,4 @@ const InquirySchema = new Schema(
     }
 );
 
-module.exports = model('Inquiry', InquirySchema);
+module.exports = new model('Inquiry', InquirySchema);

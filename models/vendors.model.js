@@ -1,10 +1,10 @@
-const { Schema, model, Types } = require('mongoose');
+const { Schema, model, Types } = require('mongoose')
 
 const VendorSchema = new Schema(
     {
         user_id: {
             type: Types.ObjectId,
-            required: true,
+            // required: true,
             unique: true,
             ref: 'User',
         },
@@ -66,11 +66,26 @@ const VendorSchema = new Schema(
                 ],
             },
         ],
-        analytics: {
-            type: [{ impression: 0, clicks: 0, overall_rating: this.avg_rating, inquires: 0 }],
-            required: true,
-            default: 0,
-        },
+        analytics: [
+            {
+                impression: {
+                    type: Number,
+                    default: 0,
+                },
+                clicks: {
+                    type: Number,
+                    default: 0,
+                },
+                overall_rating: {
+                    type: Number,
+                    default: 0,
+                },
+                inquires: {
+                    type: Number,
+                    default: 0,
+                },
+            },
+        ],
         service_opted: {
             type: [String],
             required: true,
@@ -89,13 +104,15 @@ const VendorSchema = new Schema(
                 'Ranipet', 'Salem', 'Sivagangai', 'Tenkasi', 'Thanjavur',
                 'Theni', 'Thoothukudi', 'Tiruchirappalli', 'Tirunelveli', 'Tirupattur',
                 'Tiruppur', 'Tiruvallur', 'Tiruvannamalai', 'Tiruvarur', 'Vellore',
-                'Viluppuram', 'Virudhunagar'
+                'Viluppuram', 'Virudhunagar',
             ],
         },
         prefered_customer_location: {
             type: [String],
             required: true,
-            default: this.location,
+            default: function () {
+                return [this.location];
+            },
         },
         verified: {
             type: Boolean,
@@ -125,7 +142,6 @@ const VendorSchema = new Schema(
             },
             review_score: {
                 type: Number,
-                // User Id required
             },
         },
         total_reviews: {
@@ -147,4 +163,4 @@ const VendorSchema = new Schema(
     }
 );
 
-module.exports = model('Vendor', VendorSchema);
+module.exports = new model('Vendor', VendorSchema);

@@ -16,4 +16,23 @@ const createUser = async (req, res, next) => {
     }
 };
 
+const LoginUser = async () => {
+    const user = req.body;
+
+    try {
+
+        const FindUser = Users.find({ user });
+
+        if (FindUser) {
+            res.status(200).json({ message: "Logged In succesfully !", },)
+        }
+
+
+    }
+    catch (err) {
+
+    }
+}
+
+
 module.exports = { createUser };
