@@ -1,15 +1,31 @@
 const Users = require("../models/users.model");
 
+
+const checkUserExists = async (phone) => {
+    const checkUser = await Users.find({ phone });
+    if (checkUser) {
+        return true;
+    }
+    return false;
+}
+
+
 const createUser = async (req, res, next) => {
     const user = req.body;
+    const { phone } = user;
 
     try {
-        const newUser = await Users.create(user);
-        res.status(201).json({
-            success: true,
-            message: "User created successfully!",
-            data: newUser,
-        });
+        if (!checkUserExists(phone)) {
+            const newUser = await Users.create(user);
+            return res.status(201).json({
+                success: true,
+                message: "User created successfully!",
+                data: newUser,
+            });
+
+        }
+        throw new Error("User already exists!");
+
     } catch (err) {
         err.status = 500;
         next(err);
