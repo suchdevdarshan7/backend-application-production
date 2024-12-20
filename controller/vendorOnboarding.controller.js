@@ -1,5 +1,5 @@
 
-const Roles = require('../models/vendorDetails.model.js');
+const Roles = require('../models/VendorDetails.model.js')
 
 const GetVendorOnBoarding = async (req, res, next) => {
     try {
