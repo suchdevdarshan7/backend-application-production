@@ -33,6 +33,12 @@ const createVendor = async (req, res, next) => {
     }
 }
 
+
+const getAllVendors = async (req, res, next) => {
+
+}
+
+
 module.exports = { createVendor };
 
 

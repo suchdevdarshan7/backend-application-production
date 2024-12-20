@@ -47,6 +47,10 @@ const UserSchema = new Schema(
             type: String,
             default: '',
         },
+        prefered_settings: {
+            type: [Object],
+            required: true,
+        }
     },
     {
         timestamps: true,
