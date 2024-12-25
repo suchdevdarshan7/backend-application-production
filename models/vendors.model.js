@@ -1,10 +1,10 @@
-const { Schema, model, Types } = require('mongoose')
+const { Schema, model, Types } = require('mongoose');
+const Users = require('./users.model');
 
 const VendorSchema = new Schema(
     {
         user_id: {
             type: Types.ObjectId,
-            // required: true,
             unique: true,
             ref: 'User',
         },
@@ -17,11 +17,7 @@ const VendorSchema = new Schema(
                 sub_services: [
                     {
                         sub_service_name: {
-                            type: String,
-                            required: true,
-                        },
-                        type: {
-                            type: String,
+                            type: [String],
                             required: true,
                         },
                         packages: {
@@ -58,7 +54,7 @@ const VendorSchema = new Schema(
                                 type: [String],
                             },
                             published: {
-                                type: Boolean,
+                                type: Date,
                                 default: false,
                             },
                         },
@@ -68,10 +64,6 @@ const VendorSchema = new Schema(
         ],
         analytics: [
             {
-                impression: {
-                    type: Number,
-                    default: 0,
-                },
                 clicks: {
                     type: Number,
                     default: 0,
@@ -86,10 +78,6 @@ const VendorSchema = new Schema(
                 },
             },
         ],
-        service_opted: {
-            type: [String],
-            required: true,
-        },
         about: {
             type: String,
         },
@@ -118,11 +106,23 @@ const VendorSchema = new Schema(
             type: Boolean,
             default: false,
         },
-        text_recent_enquires: {
-            type: [Object],
-        },
         call_recent_enquires: {
-            type: [Object],
+            type: [Users],
+            date: Date,
+            time: Date,
+            phoneNumber: {
+                type: String,
+            }
+        },
+        text_recent_enquires: {
+            type: [Users],
+            date: Date,
+            time: Date,
+            phoneNumber: {
+                type: String,
+            },
+            location: Users.location,
+            eventDate: Date,
         },
         work_proof: [
             {

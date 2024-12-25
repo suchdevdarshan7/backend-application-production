@@ -5,7 +5,6 @@ const cors = require('cors');
 const globalErrorHandler = require('./controller/error.controller.js');
 const connectDB = require('./db/connect.db.js')
 const PORT = process.env.PORT;
-const adminRouter = require('./routes/admin.routes.js');
 const userRouter = require('./routes/users.routes.js')
 const vendorRouter = require('./routes/vendors.routes.js')
 const env = app.get('env');
@@ -17,7 +16,7 @@ app.use('/api/v1/users', userRouter);
 
 app.use('/api/v1/vendors', vendorRouter);
 
-app.use('/api/v1/admin', adminRouter);
+
 
 app.all('*', (req, res, next) => {
     res.status(404).json({ status: "Failed", message: "Page Not Found" })

@@ -1,0 +1,55 @@
+
+1. Landing Page : 
+    Array of objects 
+        [ 
+            {
+                image : "Image1",
+                title:"advanced A nalytics",
+                description : "Get advanced analytics on customer inquiries, visits, clicks, reviews"
+            }, 
+             {
+                image : "Image2",
+                title:"Get maximum Inquiries",
+                description : "Lorem ipsum dolor sit amet consectetur. Ultricies sit velit consequat feugiat tortor tristique."
+            }, 
+             {
+                image : "Image3",
+                title:"Appear First on search",
+                description : "With our Premium Subscription Get listed on top of customer searches and 10x your customers"
+            }, 
+        ]
+
+2. On-Boarding Page : 
+    Based on Role selected (Event Heading, Event categories, and multicheckbox/singlecheckbox flag).
+    Roles : [
+        {
+            roleName : "Event planner",
+            roleImage : "EventplannerImage",
+            roleSubCategory : {
+                title : "Select the Type of events you conduct",
+                multiSelect : boolean,
+               categories : ["Complete Wedding","Temple Festivals" ]
+            }
+        },
+         {
+            roleName : "Catering",
+            roleImage : "CateringImage",
+            roleSubCategory : {
+                title : "Select the Type of events you conduct",
+                multiSelect : boolean,
+                categories : ["Complete Wedding","Temple Festivals" ]
+            }
+        }
+    ]
+
+3. Dashboard : 
+    Profile Completion : 
+        profileVerified : boolean/Enum
+        eventPlans : [
+            {
+                planName : "Wedding",
+                pricingAdded : Boolean/Enum
+            }
+        ]
+    Availability : 
+      unAvailableDates :  ["17/12/2024","20/12/2024","15/12/2024"]
