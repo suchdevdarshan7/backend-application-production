@@ -1,4 +1,5 @@
 const Users = require("../models/users.model");
+const CatchAsync = require("../utils/CatchAsync");
 
 
 const checkUserExists = async (phone) => {
@@ -10,46 +11,32 @@ const checkUserExists = async (phone) => {
 }
 
 
-const createUser = async (req, res, next) => {
+const createUser = CatchAsync(async (req, res, next) => {
     const user = req.body;
     const { phone } = user;
 
-    try {
-        if (!checkUserExists(phone)) {
-            const newUser = await Users.create(user);
-            return res.status(201).json({
-                success: true,
-                message: "User created successfully!",
-                data: newUser,
-            });
+    if (!checkUserExists(phone)) {
+        const newUser = await Users.create(user);
+        return res.status(201).json({
+            success: true,
+            message: "User created successfully!",
+            data: newUser,
+        });
 
-        }
-        throw new Error("User already exists!");
-
-    } catch (err) {
-        err.status = 500;
-        next(err);
     }
-};
+    throw new Error("User already exists!");
 
-const LoginUser = async () => {
+});
+
+const LoginUser = CatchAsync(async () => {
     const user = req.body;
+    const FindUser = await Users.find({ user });
 
-    try {
-
-        const FindUser = Users.find({ user });
-
-        if (FindUser) {
-            res.status(200).json({ message: "Logged In succesfully !", },)
-        }
-
-
-    }
-    catch (err) {
-
+    if (FindUser) {
+        res.status(200).json({ message: "Logged In succesfully !", })
     }
 }
-
+)
 
 
 module.exports = { createUser };

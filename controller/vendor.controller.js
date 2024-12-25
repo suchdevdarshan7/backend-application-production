@@ -1,4 +1,6 @@
+
 const Vendors = require('../models/vendors.model.js');
+const CatchAsync = require('../utils/CatchAsync.js');
 
 
 const checkVendors = async (phone) => {
@@ -11,32 +13,29 @@ const checkVendors = async (phone) => {
 }
 
 
-const createVendor = async (req, res, next) => {
+const createVendor = CatchAsync(async (req, res, next) => {
 
     const vendor = req.body;
 
     const { phone } = vendor;
-    try {
 
-        if (!checkVendors(phone)) {
-            const AddVendor = await Vendors.create(vendor);
+    if (!checkVendors(phone)) {
+        const AddVendor = await Vendors.create(vendor);
 
-            return res.status(201).json({ message: "Vendor created succesfully!", status: "success", vendor: AddVendor });
-        }
-
-        throw new Error("Vendor already Exists");
-
+        return res.status(201).json({ message: "Vendor created succesfully!", status: "success", vendor: AddVendor });
     }
-    catch (err) {
-        err.status = 500;
-        next(err);
-    }
-}
+
+    throw new Error("Vendor already Exists");
+})
 
 
-const getAllVendors = async (req, res, next) => {
+const getAllVendors = CatchAsync(async (req, res, next) => {
 
-}
+    const vendors = await Vendors.find({});
+
+    res.status(200).json({ data: vendors, status: "success" });
+
+})
 
 
 module.exports = { createVendor };

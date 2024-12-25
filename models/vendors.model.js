@@ -1,12 +1,13 @@
 const { Schema, model, Types } = require('mongoose');
-const Users = require('./users.model');
+
 
 const VendorSchema = new Schema(
     {
         user_id: {
             type: Types.ObjectId,
             unique: true,
-            ref: 'User',
+            ref: 'Users',
+            required: true,
         },
         categories: [
             {
@@ -17,7 +18,7 @@ const VendorSchema = new Schema(
                 sub_services: [
                     {
                         sub_service_name: {
-                            type: [String],
+                            type: String,
                             required: true,
                         },
                         packages: {
@@ -55,7 +56,6 @@ const VendorSchema = new Schema(
                             },
                             published: {
                                 type: Date,
-                                default: false,
                             },
                         },
                     },
@@ -106,24 +106,46 @@ const VendorSchema = new Schema(
             type: Boolean,
             default: false,
         },
-        call_recent_enquires: {
-            type: [Users],
-            date: Date,
-            time: Date,
-            phoneNumber: {
-                type: String,
-            }
-        },
-        text_recent_enquires: {
-            type: [Users],
-            date: Date,
-            time: Date,
-            phoneNumber: {
-                type: String,
+        call_recent_enquires: [
+            {
+                user: {
+                    type: Types.ObjectId,
+                    ref: 'Users',
+                },
+                date: {
+                    type: Date,
+                },
+                time: {
+                    type: Date,
+                },
+                phoneNumber: {
+                    type: String,
+                },
             },
-            location: Users.location,
-            eventDate: Date,
-        },
+        ],
+        text_recent_enquires: [
+            {
+                user: {
+                    type: Types.ObjectId,
+                    ref: 'Users',
+                },
+                date: {
+                    type: Date,
+                },
+                time: {
+                    type: Date,
+                },
+                phoneNumber: {
+                    type: String,
+                },
+                location: {
+                    type: String,
+                },
+                eventDate: {
+                    type: Date,
+                },
+            },
+        ],
         work_proof: [
             {
                 type: {
@@ -136,14 +158,16 @@ const VendorSchema = new Schema(
                 },
             },
         ],
-        reviews: {
-            review_message: {
-                type: String,
+        reviews: [
+            {
+                review_message: {
+                    type: String,
+                },
+                review_score: {
+                    type: Number,
+                },
             },
-            review_score: {
-                type: Number,
-            },
-        },
+        ],
         total_reviews: {
             type: Number,
             default: 0,
@@ -163,4 +187,4 @@ const VendorSchema = new Schema(
     }
 );
 
-module.exports = new model('Vendor', VendorSchema);
+module.exports = model('Vendor', VendorSchema);

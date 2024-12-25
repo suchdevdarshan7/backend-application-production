@@ -21,6 +21,6 @@ const ParentSchema = new Schema({
 });
 
 
-const ParentModel = model('Parent', ParentSchema);
+const ParentModel = model('LandingPage', ParentSchema);
 
 module.exports = ParentModel;
