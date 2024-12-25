@@ -9,23 +9,27 @@ const userRouter = require('./routes/users.routes.js')
 const vendorRouter = require('./routes/vendors.routes.js')
 const LandingRouter = require('./routes/LandingPage.routes.js');
 const RolesRouter = require('./routes/roles.routes.js')
+const AdminRouter = require('./routes/admin.routes.js');
 const env = app.get('env');
 
-app.use(express.json())
+//! Built in middleware's
 
+app.use(express.json())
 app.use(cors())
 
+//! Routing :
 
 app.use('/api/v1/roles', RolesRouter);
 app.use('/api/v1/landing', LandingRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/vendors', vendorRouter);
-
-
+app.use('/api/v1/admin', AdminRouter);
 
 app.all('*', (req, res, next) => {
     res.status(404).json({ status: "Failed", message: "Page Not Found" })
 })
+
+//! Global error controller
 
 app.use(globalErrorHandler);
 

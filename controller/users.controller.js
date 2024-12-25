@@ -1,6 +1,6 @@
 const Users = require("../models/users.model");
 const CatchAsync = require("../utils/CatchAsync");
-
+const AppError = require('../utils/AppError.js')
 
 const checkUserExists = async (phone) => {
     const checkUser = await Users.find({ phone });
@@ -24,7 +24,7 @@ const createUser = CatchAsync(async (req, res, next) => {
         });
 
     }
-    throw new Error("User already exists!");
+    throw new AppError("User already exists!");
 
 });
 
