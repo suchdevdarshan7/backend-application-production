@@ -8,16 +8,18 @@ const PORT = process.env.PORT;
 const userRouter = require('./routes/users.routes.js')
 const vendorRouter = require('./routes/vendors.routes.js')
 const LandingRouter = require('./routes/LandingPage.routes.js');
+const RolesRouter = require('./routes/roles.routes.js')
 const env = app.get('env');
 
 app.use(express.json())
 
 app.use(cors())
 
+
+app.use('/api/v1/roles', RolesRouter);
 app.use('/api/v1/landing', LandingRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/vendors', vendorRouter);
-
 
 
 

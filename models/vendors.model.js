@@ -3,10 +3,16 @@ const { Schema, model, Types } = require('mongoose');
 
 const VendorSchema = new Schema(
     {
-        user_id: {
-            type: Types.ObjectId,
-            unique: true,
-            ref: 'Users',
+        name: {
+            type: String,
+            required: true,
+        },
+        phone: {
+            type: Number,
+            required: true,
+        },
+        email: {
+            type: String,
             required: true,
         },
         categories: [
@@ -18,18 +24,17 @@ const VendorSchema = new Schema(
                 sub_services: [
                     {
                         sub_service_name: {
-                            type: String,
+                            type: [String],
                             required: true,
                         },
                         packages: {
                             basic: {
                                 price: {
                                     type: Number,
-                                    required: true,
                                 },
                                 includes: {
                                     type: [String],
-                                    required: true,
+
                                 },
                             },
                             standard: {
@@ -84,23 +89,10 @@ const VendorSchema = new Schema(
         location: {
             type: String,
             required: true,
-            enum: [
-                'Ariyalur', 'Chengalpattu', 'Chennai', 'Coimbatore', 'Cuddalore',
-                'Dharmapuri', 'Dindigul', 'Erode', 'Kallakurichi', 'Kanchipuram',
-                'Kanyakumari', 'Karur', 'Krishnagiri', 'Madurai', 'Nagapattinam',
-                'Namakkal', 'Nilgiris', 'Perambalur', 'Pudukkottai', 'Ramanathapuram',
-                'Ranipet', 'Salem', 'Sivagangai', 'Tenkasi', 'Thanjavur',
-                'Theni', 'Thoothukudi', 'Tiruchirappalli', 'Tirunelveli', 'Tirupattur',
-                'Tiruppur', 'Tiruvallur', 'Tiruvannamalai', 'Tiruvarur', 'Vellore',
-                'Viluppuram', 'Virudhunagar',
-            ],
         },
         prefered_customer_location: {
             type: [String],
             required: true,
-            default: function () {
-                return [this.location];
-            },
         },
         verified: {
             type: Boolean,
@@ -150,11 +142,9 @@ const VendorSchema = new Schema(
             {
                 type: {
                     type: String,
-                    required: true,
                 },
                 link: {
                     type: String,
-                    required: true,
                 },
             },
         ],
