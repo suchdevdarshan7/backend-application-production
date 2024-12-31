@@ -1,7 +1,7 @@
 const Users = require("../models/users.model.js");
 const Vendors = require('../models/vendors.model.js');
 const AppError = require("../utils/AppError.js");
-const CatchAsync = require('../utils/CatchAsync.js')
+const CatchAsync = require('../utils/CatchAsync.js');
 
 const GetAllUsers = CatchAsync(async (req, res, next) => {
     const users = await Users.find();
@@ -10,7 +10,7 @@ const GetAllUsers = CatchAsync(async (req, res, next) => {
 })
 
 const GetAllVendors = CatchAsync(async (req, res, next) => {
-    const vendors = await Vendors.find({}, { name: 1, phone: 1, email: 1, });
+    const vendors = await Vendors.find({}, {});
     res.status(200).json({ status: "success", vendors })
 })
 
