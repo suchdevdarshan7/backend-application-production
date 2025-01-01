@@ -15,17 +15,22 @@ const VendorSchema = new Schema(
             type: String,
             required: true,
         },
+
+        // uuid: {
+        //     type: String,
+        //     required: true,
+        // },
         categories: [
             {
                 category_name: {
                     type: String,
-                    required: true,
+
                 },
                 sub_services: [
                     {
                         sub_service_name: {
                             type: [String],
-                            required: true,
+
                         },
                         packages: {
                             basic: {
@@ -88,11 +93,9 @@ const VendorSchema = new Schema(
         },
         location: {
             type: String,
-            required: true,
         },
         prefered_customer_location: {
             type: [String],
-            required: true,
         },
         verified: {
             type: Boolean,

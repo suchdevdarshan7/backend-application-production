@@ -10,3 +10,7 @@ Admin routes:
 Vendor Location:
 
 /api/v1/admin/vendorLocation
+
+loading page ,vendor signup , vendor details not protected
+
+else is protected

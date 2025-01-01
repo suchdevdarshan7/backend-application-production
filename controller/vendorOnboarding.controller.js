@@ -7,21 +7,20 @@ const AppError = require("../utils/AppError.js")
 const createVendor = CatchAsync(async (req, res, next) => {
 
     const vendor = req.body;
-    const { email, phone } = vendor;
+    const { email, phone, name } = vendor;
 
 
-    const FindUser = await Vendors.find({
+    const FindVendor = await Vendors.find({
         $or: [{ email: email }, { phone: phone }]
     });
 
-    console.log(FindUser)
 
-    if (FindUser.length > 0) {
+    if (FindVendor.length > 0) {
         throw new AppError("Vendor already exists", 404);
     }
 
 
-    const AddVendor = await Vendors.create(vendor);
+    const AddVendor = await Vendors.create({ name, email, phone });
 
     return res.status(201).json({
         message: "Vendor created successfully!",
@@ -30,7 +29,14 @@ const createVendor = CatchAsync(async (req, res, next) => {
     });
 });
 
+const fireBaseAuthentication = CatchAsync(async () => {
 
 
 
-module.exports = { createVendor };
+    next();
+})
+
+
+
+
+module.exports = { createVendor, fireBaseAuthentication };

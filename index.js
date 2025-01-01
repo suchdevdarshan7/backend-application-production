@@ -19,11 +19,11 @@ app.use(cors())
 
 //! Routing :
 
-app.use('/api/v1/roles', RolesRouter);
-app.use('/api/v1/landing', LandingRouter);
-app.use('/api/v1/users', userRouter);
-app.use('/api/v1/vendors', vendorRouter);
-app.use('/api/v1/admin', AdminRouter);
+app.use('/loadingpage', LandingRouter);
+app.use('/roles', RolesRouter);
+app.use('/users', userRouter);
+app.use('/vendors', vendorRouter);
+app.use('/admin', AdminRouter);
 
 app.all('*', (req, res, next) => {
     res.status(404).json({ status: "Failed", message: "Page Not Found" })

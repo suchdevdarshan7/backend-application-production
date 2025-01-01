@@ -13,10 +13,25 @@ const getAllVendors = CatchAsync(async (req, res, next) => {
 
 })
 
+const getVendorById = CatchAsync(async (req, res, next) => {
+
+    const { id } = req.params;
+
+    const Vendor = await Vendors.findById(id);
+
+    if (Vendor) {
+        return res.status(200).json({ status: "sucesss", vendor: Vendor })
+    }
+
+    next(new AppError("Vendor doesn't Exists  ", 404));
+
+
+})
 
 
 
 
-module.exports = { createVendor };
+
+module.exports = { getAllVendors, getVendorById };
 
 

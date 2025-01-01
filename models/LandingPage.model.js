@@ -13,6 +13,10 @@ const ItemSchema = new Schema({
         type: String,
         required: true,
     },
+    terms: {
+        type: String,
+        required: true,
+    }
 });
 
 
