@@ -8,7 +8,7 @@ const { getVendorById } = require('../controller/vendor.controller.js');
 router.route('/').post(createVendor);
 
 
-router.route('/:id').get(getVendorById);
+router.route('/:id').get(getVendorById).post('/')
 
 
 
